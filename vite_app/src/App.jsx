@@ -15,7 +15,7 @@ const App = () => {
         <Link to="/Api4" style={{ margin: '0 10px' }}>Api4</Link>
       </nav>
       <Routes>
-        <Route path="/" element={<Api1 />} />
+        <Route path="/Api1" element={<Api1 />} />
         <Route path="/Api2" element={<Api2 />} />
         <Route path="/Api3" element={<Api3 />} />
         <Route path="/Api4" element={<Api4 />} />
