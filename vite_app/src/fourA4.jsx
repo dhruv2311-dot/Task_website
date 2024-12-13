@@ -9,10 +9,14 @@ const Api4 = () => {
     fetch('https://indian-banks-api.onrender.com/banks')
       .then((res) => res.json())
       .then((data) => {
-        setBanks(data);
+        console.log(data); // Log the data to check the response structure
+        setBanks(data); // Ensure data is being set correctly
         setLoading(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error('Error fetching data:', err);
+        setLoading(false);
+      });
   }, []);
 
   const filteredBanks = banks.filter((bank) =>
@@ -22,14 +26,18 @@ const Api4 = () => {
   return (
     <div>
       <h1>Indian Banks</h1>
+      
       <input
         type="text"
         placeholder="Search by IFSC"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+      
       {loading ? (
         <p>Loading...</p>
+      ) : filteredBanks.length === 0 ? (
+        <p>No banks found.</p>
       ) : (
         <ul>
           {filteredBanks.map((bank) => (
@@ -44,3 +52,4 @@ const Api4 = () => {
 };
 
 export default Api4;
+
