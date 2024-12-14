@@ -1,12 +1,33 @@
-import "./App.css";
-import React, { useState } from "react";
+import "./firstA1.css";
+import React, { useState, useEffect } from "react";
 
 const Api1 = () => {
+  const [categories, setCategories] = useState([]);
   const [meals, setMeals] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedMeal, setSelectedMeal] = useState(null); // State to hold the selected meal
-  const MAX_RESULTS = 10; // Maximum number of results to display
+  const [selectedMeal, setSelectedMeal] = useState(null);
+  const MAX_RESULTS = 10;
 
+  // Fetch and sort categories alphabetically
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/categories.php`
+      );
+      const data = await response.json();
+
+      if (data.categories) {
+        const sortedCategories = data.categories.sort((a, b) =>
+          a.strCategory.localeCompare(b.strCategory)
+        );
+        setCategories(sortedCategories);
+      }
+    } catch (error) {
+      console.error("Failed to fetch categories:", error);
+    }
+  };
+
+  // Fetch meals by search term or category
   const fetchMeals = async (query) => {
     try {
       const response = await fetch(
@@ -27,7 +48,8 @@ const Api1 = () => {
           return { ...meal, ingredients };
         });
 
-        // Limit results to MAX_RESULTS
+        // Sort meals alphabetically and limit to MAX_RESULTS
+        mealsWithIngredients.sort((a, b) => a.strMeal.localeCompare(b.strMeal));
         setMeals(mealsWithIngredients.slice(0, MAX_RESULTS));
       } else {
         setMeals([]);
@@ -37,6 +59,11 @@ const Api1 = () => {
     }
   };
 
+  // Fetch categories on component load
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
   const handleSearch = () => {
     if (searchTerm.trim()) {
       fetchMeals(searchTerm.trim());
@@ -44,11 +71,11 @@ const Api1 = () => {
   };
 
   const handleMealClick = (meal) => {
-    setSelectedMeal(meal); // Set the selected meal
+    setSelectedMeal(meal);
   };
 
   const closeModal = () => {
-    setSelectedMeal(null); // Close the modal
+    setSelectedMeal(null);
   };
 
   return (
@@ -57,9 +84,20 @@ const Api1 = () => {
       <div className="sidebar">
         <h3>Meal Categories</h3>
         <ul>
+          <li onClick={() => fetchMeals("Beef")}>Beef</li>
           <li onClick={() => fetchMeals("Breakfast")}>Breakfast</li>
-          <li onClick={() => fetchMeals("Lunch")}>Lunch</li>
-          <li onClick={() => fetchMeals("Dinner")}>Dinner</li>
+          <li onClick={() => fetchMeals("Chicken")}>Chicken</li>
+          <li onClick={() => fetchMeals("Dessert")}>Dessert</li>
+          <li onClick={() => fetchMeals("Goat")}>Goat</li>
+          <li onClick={() => fetchMeals("Lamb")}>Lamb</li>
+          <li onClick={() => fetchMeals("Miscellaneous")}>Miscellaneous</li>
+          <li onClick={() => fetchMeals("Pasta")}>Pasta</li>
+          <li onClick={() => fetchMeals("Pork")}>Pork</li>
+          <li onClick={() => fetchMeals("Seafood")}>Seafood</li>
+          <li onClick={() => fetchMeals("Side")}>Side</li>
+          <li onClick={() => fetchMeals("Starter")}>Starter</li>
+          <li onClick={() => fetchMeals("Vegan")}>Vegan</li>
+          <li onClick={() => fetchMeals("Vegetarian")}>Vegetarian</li>
         </ul>
       </div>
 
@@ -83,7 +121,7 @@ const Api1 = () => {
               <div
                 className="item"
                 key={index}
-                onClick={() => handleMealClick(meal)} // Click handler to open modal
+                onClick={() => handleMealClick(meal)}
               >
                 <div className="image-container">
                   <img
@@ -116,7 +154,7 @@ const Api1 = () => {
         <div className="modal">
           <div className="modal-content">
             <button className="close-btn" onClick={closeModal}>
-              ×
+              &times;
             </button>
             <h2>{selectedMeal.strMeal}</h2>
             <img
