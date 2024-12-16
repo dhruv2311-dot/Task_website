@@ -1,32 +1,118 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from "react";
+import "./thirdA3.css";
 
 const Api3 = () => {
-  const [characters, setCharacters] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]); // State to hold API results
+  const [loading, setLoading] = useState(false); // Loading indicator
+  const [error, setError] = useState(null); // Error handling
+  const [apiType, setApiType] = useState("books"); // Current API type
 
-  useEffect(() => {
-    fetch('https://hp-api.onrender.com/api/characters')
-      .then((res) => res.json())
-      .then((data) => {
-        setCharacters(data);
-        setLoading(false);
-      })
-      .catch((err) => console.error(err));
-  }, []);
+  // Function to fetch data based on selected API
+  const fetchData = async (type) => {
+    setLoading(true);
+    setError(null);
+    setData([]);
+    setApiType(type);
+
+    const url =
+      type === "books"
+        ? "https://potterapi-fedeperin.vercel.app/en/books"
+        : "https://potterapi-fedeperin.vercel.app/en/characters";
+
+    try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log(`Fetched ${type}:`, result); // Debug: Log the API response
+      setData(result);
+    } catch (err) {
+      console.error("Error fetching data:", err.message);
+      setError(`Failed to fetch ${type}. Please try again.`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div>
-      <h1>Harry Potter Characters</h1>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <ul>
-          {characters.slice(0, 10).map((char) => (
-            <li key={char.name}>{char.name}</li>
+    <>
+      <div className="button-container">
+        <button className="fetch-button" onClick={() => fetchData("books")}>
+          Show Books
+        </button>
+        <button className="fetch-button" onClick={() => fetchData("characters")}>
+          Show Characters
+        </button>
+      </div>
+
+      {loading && <p className="loading">Loading...</p>}
+      {error && <p className="error">{error}</p>}
+
+      {/* Render Books */}
+      {apiType === "books" && !loading && !error && (
+        <div className="book-grid">
+          {data.map((book) => (
+            <div key={book.id || book.title} className="book-card">
+              <img
+                src={book.cover || "https://via.placeholder.com/200"}
+                alt={book.title || "No Title"}
+                className="book-image"
+              />
+              <div className="book-details">
+                <h2 className="book-title">{book.title || "Unknown Title"}</h2>
+                <p>
+                  <strong>Release Date:</strong> {book.releaseDate || "N/A"}
+                </p>
+                <p>
+                  <strong>Pages:</strong> {book.pages || "N/A"}
+                </p>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
-    </div>
+
+      {/* Render Characters */}
+      {apiType === "characters" && !loading && !error && (
+        <div className="character-grid">
+          {data.map((character) => (
+            <div
+              key={character.id || character.name}
+              className="character-card"
+            >
+              <img
+                src={character.image || "https://via.placeholder.com/150"}
+                alt={character.name || "No Name"}
+                className="character-image"
+              />
+              <div className="character-details">
+                <h2 className="character-name">{character.fullName || "Not available"}</h2>
+                
+                <p>
+                  <strong>Nickname:</strong>{" "}
+                  {character.nickname || "Not available"}
+                </p>
+                <p>
+                  <strong>House:</strong>{" "}
+                  {character.hogwartsHouse || "Not available"}
+                </p>
+                <p>
+                  <strong>Interpreted By:</strong>{" "}
+                  {character.interpretedBy || "Not available"}
+                </p>
+                <p>
+                  <strong>Birthdate:</strong>{" "}
+                  {character.birthdate || "Not available"}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 

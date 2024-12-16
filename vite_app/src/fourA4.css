@@ -1,0 +1,145 @@
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Title */
+  .title {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    position: relative;
+  }
+  
+  .title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: #ff758c;
+    margin: 10px auto;
+  }
+  
+  /* Form Group */
+  .form-group {
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 25px 0 0 25px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .input:focus {
+    border-color: #ff758c;
+  }
+  
+  .button {
+    background: #ff758c;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .button:hover {
+    background: #e74c3c;
+    transform: scale(1.05);
+  }
+  
+  /* Error Message */
+  .error {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+  }
+  
+  /* Details Section */
+  .details {
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .details h2 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .details p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 5px 0;
+    color: black;
+  }
+  
+  .details strong {
+    color: #e74c3c;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .container {
+      padding: 20px;
+    }
+  
+    .input {
+      font-size: 0.9rem;
+    }
+  
+    .button {
+      font-size: 0.9rem;
+      padding: 8px 15px;
+    }
+  
+    .details p {
+      font-size: 0.9rem;
+    }
+  }
+  .state-list {
+    list-style-type: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+  }
+  
+  .state-item {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .state-item:hover {
+    background-color: #eaeaea;
+  }
+  
