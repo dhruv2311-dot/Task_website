@@ -8,7 +8,7 @@
     text-align: center;
   }
   
-  /* Title */
+
   .title {
     font-size: 2rem;
     color: #2c3e50;
@@ -28,7 +28,7 @@
     margin: 10px auto;
   }
   
-  /* Form Group */
+ 
   .form-group {
     display: flex;
     margin-bottom: 20px;
@@ -67,7 +67,7 @@
     transform: scale(1.05);
   }
   
-  /* Error Message */
+ 
   .error {
     color: #e74c3c;
     font-weight: bold;
@@ -76,7 +76,7 @@
     text-transform: capitalize;
   }
   
-  /* Details Section */
+
   .details {
     background: #f9f9f9;
     border-radius: 10px;
@@ -104,7 +104,7 @@
     color: #e74c3c;
   }
   
-  /* Responsive Design */
+  
   @media (max-width: 600px) {
     .container {
       padding: 20px;

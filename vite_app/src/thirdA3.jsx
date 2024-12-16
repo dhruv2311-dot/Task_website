@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import "./thirdA3.css";
 
 const Api3 = () => {
-  const [data, setData] = useState([]); // State to hold API results
-  const [loading, setLoading] = useState(false); // Loading indicator
-  const [error, setError] = useState(null); // Error handling
-  const [apiType, setApiType] = useState("books"); // Current API type
+  const [data, setData] = useState([]); 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null); 
+  const [apiType, setApiType] = useState("books"); 
 
-  // Function to fetch data based on selected API
+ 
   const fetchData = async (type) => {
     setLoading(true);
     setError(null);
@@ -27,7 +27,7 @@ const Api3 = () => {
       }
 
       const result = await response.json();
-      console.log(`Fetched ${type}:`, result); // Debug: Log the API response
+      console.log(`Fetched ${type}:`, result);
       setData(result);
     } catch (err) {
       console.error("Error fetching data:", err.message);
@@ -51,7 +51,6 @@ const Api3 = () => {
       {loading && <p className="loading">Loading...</p>}
       {error && <p className="error">{error}</p>}
 
-      {/* Render Books */}
       {apiType === "books" && !loading && !error && (
         <div className="book-grid">
           {data.map((book) => (
@@ -75,7 +74,7 @@ const Api3 = () => {
         </div>
       )}
 
-      {/* Render Characters */}
+     
       {apiType === "characters" && !loading && !error && (
         <div className="character-grid">
           {data.map((character) => (

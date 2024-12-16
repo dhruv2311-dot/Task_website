@@ -103,7 +103,7 @@ const Api1 = () => {
 
       {/* Main Content */}
       <div className="main-content">
-        <h1>Search</h1>
+        <h1>Search Meals</h1>
         <div className="filters">
           <input
             type="text"

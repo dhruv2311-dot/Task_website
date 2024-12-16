@@ -5,14 +5,13 @@ import "./fourA4.css";
 function Api4() {
   const [ifscCode, setIfscCode] = useState("");
   const [bankDetails, setBankDetails] = useState(null);
-  const [states, setStates] = useState([]); // All states
-  const [filteredStates, setFilteredStates] = useState([]); // Filtered states for search
-  const [stateSearch, setStateSearch] = useState(""); // Search term for state
+  const [states, setStates] = useState([]); 
+  const [filteredStates, setFilteredStates] = useState([]);
+  const [stateSearch, setStateSearch] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [stateBanks, setStateBanks] = useState([]);
   const [error, setError] = useState(null);
 
-  // Fetch the list of states when the component loads
   useEffect(() => {
     const fetchStates = async () => {
       try {
@@ -24,8 +23,7 @@ function Api4() {
 
         if (data && Array.isArray(data.STATES)) {
           setStates(data.STATES);
-          setFilteredStates(data.STATES); // Initialize filtered states
-        } else {
+          setFilteredStates(data.STATES); 
           throw new Error("Invalid state data received from the API.");
         }
       } catch (err) {
@@ -36,7 +34,6 @@ function Api4() {
     fetchStates();
   }, []);
 
-  // Filter states based on the search term
   useEffect(() => {
     setFilteredStates(
       states.filter((state) =>
@@ -53,7 +50,7 @@ function Api4() {
     }
 
     try {
-      setError(null); // Reset error before fetching
+      setError(null); 
       const response = await fetch(
         `https://bank-apis.justinclicks.com/API/V1/IFSC/${ifscCode}/`
       );
@@ -75,7 +72,7 @@ function Api4() {
 
   const handleFetchBanksByState = async (state) => {
     try {
-      setError(null); // Reset error before fetching
+      setError(null);
       const response = await fetch(
         `https://bank-apis.justinclicks.com/API/V1/STATE/${state}/`
       );
@@ -85,7 +82,7 @@ function Api4() {
       const data = await response.json();
 
       if (data && Array.isArray(data.BANKS)) {
-        setStateBanks(data.BANKS); // Populate banks list for the selected state
+        setStateBanks(data.BANKS); 
       } else {
         throw new Error("No bank data found for the selected state.");
       }
@@ -96,21 +93,21 @@ function Api4() {
   };
 
   const handleStateClick = (state) => {
-    setSelectedState(state); // Set selected state
-    handleFetchBanksByState(state); // Fetch banks for the selected state
+    setSelectedState(state);
+    handleFetchBanksByState(state); 
   };
 
   return (
     <div className="container">
       <h1 className="title">Bank Lookup</h1>
 
-      {/* IFSC Lookup Section */}
+   
       <div className="form-group">
         <input
           type="text"
           placeholder="Enter IFSC Code (e.g., BARB0DHRANG)"
           value={ifscCode}
-          onChange={(e) => setIfscCode(e.target.value.toUpperCase())} // Automatically convert to uppercase
+          onChange={(e) => setIfscCode(e.target.value.toUpperCase())} 
           className="input"
         />
         <button onClick={handleFetchIFSC} className="button">
@@ -130,13 +127,13 @@ function Api4() {
         </div>
       )}
 
-      {/* State Search Section */}
+ 
       <div className="form-group">
         <input
           type="text"
           placeholder="Search for a state"
           value={stateSearch}
-          onChange={(e) => setStateSearch(e.target.value)} // Update search input
+          onChange={(e) => setStateSearch(e.target.value)} 
           className="input"
         />
         {filteredStates.length > 0 ? (
@@ -145,7 +142,7 @@ function Api4() {
               <li
                 key={index}
                 className="state-item"
-                onClick={() => handleStateClick(state)} // Select state on click
+                onClick={() => handleStateClick(state)}
               >
                 {state}
               </li>

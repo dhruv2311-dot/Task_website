@@ -18,7 +18,7 @@ body {
     width: 200px;
     position: fixed;
     left: 0;
-    top: 70px;
+    top: 90px;
     height: 100%;
     background-color: #fff;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
@@ -72,7 +72,7 @@ body {
     color: #555;
   }
   
-  /* General layout */
+
   .menu-container {
     display: flex;
     gap: 20px;
@@ -136,7 +136,7 @@ body {
     background-color: #0056b3;
   }
   
-  /* Meal card styling */
+
   .items {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -185,7 +185,7 @@ body {
     margin: 5px 0;
     color: #555;
   }
-  /* Styles for grid items */
+  
   .item {
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -195,7 +195,7 @@ body {
   }
   
   .item:hover {
-    transform: translateY(-5px); /* Hover effect */
+    transform: translateY(-5px); 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
   
@@ -205,7 +205,7 @@ body {
     display: block;
   }
   
-  /* Modal Styles */
+  
   .modal {
     position: fixed;
     top: 0;
@@ -216,7 +216,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px; /* Add padding to avoid content touching the edges */
+    padding: 10px; 
     box-sizing: border-box;
   }
   
@@ -225,10 +225,10 @@ body {
     padding: 20px;
     border-radius: 10px;
     width: 100%;
-    max-width: 600px; /* Maximum width */
-    max-height: 80vh; /* Ensure modal content doesn't exceed viewport height */
+    max-width: 600px;
+    max-height: 80vh;
     position: relative;
-    overflow: auto; /* Allow scrolling if content exceeds */
+    overflow: auto; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   }
   
@@ -236,13 +236,13 @@ body {
     width: 100%;
     height: auto;
     border-radius: 10px;
-    object-fit: contain; /* Ensures image maintains aspect ratio */
+    object-fit: contain; 
   }
   
   .video-container iframe {
     width: 100%;
     height: auto;
-    max-height: 315px; /* Ensure video doesn't overflow */
+    max-height: 315px; 
     margin-top: 15px;
   }
   

@@ -7,7 +7,7 @@ const Api2 = () => {
   const [selectedCocktail, setSelectedCocktail] = useState(null);
   const [theme, setTheme] = useState("default"); // Default theme
 
-  // Fetch cocktails based on search term
+ 
   const fetchCocktails = async (query) => {
     try {
       const response = await fetch(
@@ -17,7 +17,7 @@ const Api2 = () => {
 
       if (data.drinks) {
         setCocktails(data.drinks);
-        setTheme("cocktail"); // Set cocktail theme when data loads
+        setTheme("cocktail"); 
       } else {
         setCocktails([]);
         setTheme("default");
@@ -47,7 +47,7 @@ const Api2 = () => {
 
   return (
     <div className={`menu-container ${theme}`}>
-      {/* Sidebar */}
+      
       <div className="sidebar">
         <h3>Cocktail Categories</h3>
         <ul>
@@ -68,7 +68,7 @@ const Api2 = () => {
         </ul>
       </div>
 
-      {/* Main Content */}
+      
       <div className="main-content">
         <h1>Search Cocktails</h1>
         <div className="filters">
@@ -81,7 +81,7 @@ const Api2 = () => {
           <button onClick={handleSearch}>Search</button>
         </div>
 
-        {/* Cocktails Grid */}
+        
         <div className="items">
           {cocktails.length > 0 ? (
             cocktails.map((cocktail, index) => (
@@ -110,7 +110,7 @@ const Api2 = () => {
         </div>
       </div>
 
-      {/* Modal for Cocktail Details */}
+      
       {selectedCocktail && (
         <div className="modal">
           <div className="modal-content">
