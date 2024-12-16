@@ -38,7 +38,6 @@ function Api4() {
     fetchStates();
   }, []);
 
-  // Fetch districts based on the selected state
   const fetchDistricts = async (state) => {
     setSelectedState(state);
     setDistricts([]);
@@ -64,7 +63,6 @@ function Api4() {
     }
   };
 
-  // Fetch bank details based on IFSC code
   const fetchBankDetails = async () => {
     if (!ifscCode) {
       setError("Please enter a valid IFSC code.");
@@ -101,37 +99,7 @@ function Api4() {
       {loading && <p className="loading">Loading...</p>}
       {error && <p className="error">{error}</p>}
 
-      {/* States */}
-      <div>
-        <h2>States</h2>
-        {states.length > 0 ? (
-          states.map((state, index) => (
-            <p
-              key={index}
-              className="list-item"
-              onClick={() => handleStateClick(state)}
-            >
-              {state}
-            </p>
-          ))
-        ) : (
-          <p>No states available.</p>
-        )}
-      </div>
-
-      {/* Districts */}
-      {districts.length > 0 && (
-        <div>
-          <h2>Districts in {selectedState}</h2>
-          {districts.map((district, index) => (
-            <p key={index} className="list-item">
-              {district}
-            </p>
-          ))}
-        </div>
-      )}
-
-      {/* IFSC Code Input */}
+      
       <div className="ifsc-container">
         <h2>Enter IFSC Code</h2>
         <input
@@ -145,7 +113,7 @@ function Api4() {
           Get Bank Details
         </button>
 
-        {/* Bank Details */}
+      
         {bankDetails && (
           <div className="bank-details">
             <h3>Bank Details</h3>
@@ -158,6 +126,37 @@ function Api4() {
           </div>
         )}
       </div>
+
+      {bankDetails && (
+        <div>
+          <h2>States</h2>
+          {states.length > 0 ? (
+            states.map((state, index) => (
+              <p
+                key={index}
+                className="list-item"
+                onClick={() => handleStateClick(state)}
+              >
+                {state}
+              </p>
+            ))
+          ) : (
+            <p>No states available.</p>
+          )}
+        </div>
+      )}
+
+      
+      {districts.length > 0 && (
+        <div>
+          <h2>Districts in {selectedState}</h2>
+          {districts.map((district, index) => (
+            <p key={index} className="list-item">
+              {district}
+            </p>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
