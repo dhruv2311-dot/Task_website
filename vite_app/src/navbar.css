@@ -9,11 +9,28 @@
     position: relative;
   }
   
-  .logo {
+  /* Logo Styles */
+.logo {
     font-size: 1.5rem;
     font-weight: bold;
     color: white;
+    transition: color 0.3s ease, transform 0.3s ease;
+    cursor: pointer; /* Makes the logo look clickable */
   }
+  
+  /* Logo Hover Effects */
+  .logo:hover {
+    color: sandybrown; /* Gold color on hover */
+    transform: rotate(360deg) scale(0.9);  /* Slightly enlarge the logo */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Adding a subtle shadow effect */
+  }
+  
+  /* Logo Click Animation */
+  .logo:active {
+    transform: scale(1.05); /* Slightly shrink when clicked */
+    color: #FF6347; /* Tomato color when clicked */
+  }
+  
   
  
   .fetch-button {

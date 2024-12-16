@@ -142,7 +142,7 @@ function Api4() {
               <li
                 key={index}
                 className="state-item"
-                onClick={() => handleStateClick(state)}
+                onClick={() => handleStateClick(state)} 
               >
                 {state}
               </li>

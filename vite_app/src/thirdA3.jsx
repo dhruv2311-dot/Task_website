@@ -69,7 +69,7 @@ const Api3 = () => {
                   <strong>Pages:</strong> {book.pages || "N/A"}
                 </p>
               </div>
-            </div>
+            </div>  
           ))}
         </div>
       )}
